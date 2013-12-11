@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="machineagent">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../AppD/codebase/agent/system-agent/build/classes" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

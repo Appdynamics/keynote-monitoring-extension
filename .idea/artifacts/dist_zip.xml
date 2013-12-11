@@ -1,0 +1,20 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="dist_zip">
+    <output-path>$PROJECT_DIR$/out/artifacts/dist_zip</output-path>
+    <root id="archive" name="KeynoteMonitor.zip">
+      <element id="directory" name="lib">
+        <element id="library" level="project" name="commons-httpclient-4.2" />
+        <element id="library" level="project" name="commons-lang-2.4" />
+        <element id="library" level="project" name="commons-logging-1.1.1" />
+        <element id="library" level="project" name="resty" />
+      </element>
+      <element id="file-copy" path="$PROJECT_DIR$/monitor.xml" />
+      <element id="archive" name="KeynoteMonitor.jar">
+        <element id="module-output" name="KeynoteMonitor" />
+      </element>
+      <element id="file-copy" path="$PROJECT_DIR$/CONTRIBUTING.md" />
+      <element id="file-copy" path="$PROJECT_DIR$/LICENSE" />
+      <element id="file-copy" path="$PROJECT_DIR$/README.md" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="resty">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Downloads/resty-0.3.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
