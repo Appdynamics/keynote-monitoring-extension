@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="commons-lang-2.4">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../AppD/codebase/thirdparty/lib/commons/commons-lang-2.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/commons-lang-2.4.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

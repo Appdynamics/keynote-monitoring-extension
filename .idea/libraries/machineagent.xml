@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="machineagent">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/../AppD/codebase/agent/system-agent/build/classes" />
+      <root url="jar://$PROJECT_DIR$/lib/machineagent.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

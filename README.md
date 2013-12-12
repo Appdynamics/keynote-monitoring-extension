@@ -70,6 +70,6 @@ For any questions or feature request, please contact [AppDynamics Center of Exce
 
 
 [Keynote API console]: http://api.keynote.com/apiconsole/apikeygen.aspx
-[GitHub]: https://github.com/tradel/KeynoteMonitor
+[GitHub]: https://github.com/Appdynamics/keynote-monitoring-extension
 [AppSphere]: http://appsphere.appdynamics.com/t5/eXchange/F5-Monitoring-Extension/idi-p/2063
 [AppDynamics Center of Excellence]: mailto:ace-request@appdynamics.com

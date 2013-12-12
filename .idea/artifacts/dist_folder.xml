@@ -8,7 +8,7 @@
         <element id="library" level="project" name="commons-logging-1.1.1" />
         <element id="library" level="project" name="resty" />
       </element>
-      <element id="file-copy" path="$PROJECT_DIR$/monitor.xml" />
+      <element id="file-copy" path="$PROJECT_DIR$/conf/monitor.xml" />
       <element id="archive" name="KeynoteMonitor.jar">
         <element id="module-output" name="KeynoteMonitor" />
       </element>
