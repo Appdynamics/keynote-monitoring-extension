@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="keynotemonitor" default="all">
+  
+  
+  <property file="build.properties"/>
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <!-- 
+  <property name="skip.tests" value="true"/>
+   -->
+  
+  <!-- Compiler options -->
+  
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="128m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/SCCS/**"/>
+    <exclude name="**/RCS/**"/>
+    <exclude name="**/rcs/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/.pyc/**"/>
+    <exclude name="**/.pyo/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/*.hprof/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/.hg/**"/>
+    <exclude name="**/*.lib/**"/>
+    <exclude name="**/*~/**"/>
+    <exclude name="**/__pycache__/**"/>
+    <exclude name="**/.bundle/**"/>
+    <exclude name="**/*.rbc/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.war"/>
+    <include name="*.ear"/>
+    <include name="*.apk"/>
+    <include name="*.zip"/>
+    <include name="*.swc"/>
+    <include name="*.ane"/>
+    <include name="*.egg"/>
+    <include name="*.jar"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <exclude name="**/?*.java"/>
+    <exclude name="**/?*.form"/>
+    <exclude name="**/?*.class"/>
+    <exclude name="**/?*.groovy"/>
+    <exclude name="**/?*.scala"/>
+    <exclude name="**/?*.flex"/>
+    <exclude name="**/?*.kt"/>
+    <exclude name="**/?*.clj"/>
+  </patternset>
+  
+  <!-- JDK definitions -->
+  
+  <property name="jdk.bin.1.6" value="${jdk.home.1.6}/bin"/>
+  <path id="jdk.classpath.1.6">
+    <fileset dir="${jdk.home.1.6}">
+      <include name="lib/deploy.jar"/>
+      <include name="lib/dt.jar"/>
+      <include name="lib/javaws.jar"/>
+      <include name="lib/jce.jar"/>
+      <include name="lib/jconsole.jar"/>
+      <include name="lib/management-agent.jar"/>
+      <include name="lib/plugin.jar"/>
+      <include name="lib/sa-jdi.jar"/>
+      <include name="../Classes/charsets.jar"/>
+      <include name="../Classes/classes.jar"/>
+      <include name="../Classes/jsse.jar"/>
+      <include name="../Classes/ui.jar"/>
+      <include name="lib/ext/apple_provider.jar"/>
+      <include name="lib/ext/dnsns.jar"/>
+      <include name="lib/ext/localedata.jar"/>
+      <include name="lib/ext/sunjce_provider.jar"/>
+      <include name="lib/ext/sunpkcs11.jar"/>
+    </fileset>
+  </path>
+  
+  <property name="project.jdk.home" value="${jdk.home.1.6}"/>
+  <property name="project.jdk.bin" value="${jdk.bin.1.6}"/>
+  <property name="project.jdk.classpath" value="jdk.classpath.1.6"/>
+  
+  
+  <!-- Project Libraries -->
+  
+  <path id="library.commons-httpclient-4.2.classpath">
+    <pathelement location="${basedir}/lib/httpclient-4.2.3.jar"/>
+    <pathelement location="${basedir}/lib/httpcore-4.2.2.jar"/>
+  </path>
+  
+  <path id="library.commons-lang-2.4.classpath">
+    <pathelement location="${basedir}/lib/commons-lang-2.4.jar"/>
+  </path>
+  
+  <path id="library.commons-logging-1.1.1.classpath">
+    <pathelement location="${basedir}/lib/commons-logging-1.1.1.jar"/>
+  </path>
+  
+  <path id="library.machineagent.classpath">
+    <pathelement location="${basedir}/lib/machineagent.jar"/>
+  </path>
+  
+  <path id="library.resty.classpath">
+    <pathelement location="${basedir}/lib/resty-0.3.2.jar"/>
+  </path>
+  
+  
+  <!-- Global Libraries -->
+  <!-- Register Custom Compiler Taskdefs -->
+  <property name="javac2.home" value="${idea.home}/lib"/>
+  <path id="javac2.classpath">
+    <pathelement location="${javac2.home}/javac2.jar"/>
+    <pathelement location="${javac2.home}/jdom.jar"/>
+    <pathelement location="${javac2.home}/asm4-all.jar"/>
+    <pathelement location="${javac2.home}/jgoodies-forms.jar"/>
+  </path>
+  <target name="register.custom.compilers">
+    <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.classpath"/>
+    <taskdef name="instrumentIdeaExtensions" classname="com.intellij.ant.InstrumentIdeaExtensions" classpathref="javac2.classpath"/>
+  </target>
+  
+  <!-- Modules -->
+  
+  
+  <!-- Module KeynoteMonitor -->
+  
+  <dirname property="module.keynotemonitor.basedir" file="${ant.file}"/>
+  
+  
+  <property name="module.jdk.home.keynotemonitor" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.keynotemonitor" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.keynotemonitor" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.keynotemonitor" value="${compiler.args}"/>
+  
+  <property name="keynotemonitor.output.dir" value="${module.keynotemonitor.basedir}/out/production/KeynoteMonitor"/>
+  <property name="keynotemonitor.testoutput.dir" value="${module.keynotemonitor.basedir}/out/test/KeynoteMonitor"/>
+  
+  <path id="keynotemonitor.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="keynotemonitor.module.production.classpath">
+    <path refid="${module.jdk.classpath.keynotemonitor}"/>
+    <path refid="library.resty.classpath"/>
+    <path refid="library.machineagent.classpath"/>
+    <path refid="library.commons-httpclient-4.2.classpath"/>
+    <path refid="library.commons-lang-2.4.classpath"/>
+    <path refid="library.commons-logging-1.1.1.classpath"/>
+  </path>
+  
+  <path id="keynotemonitor.runtime.production.module.classpath">
+    <pathelement location="${keynotemonitor.output.dir}"/>
+    <path refid="library.resty.classpath"/>
+    <path refid="library.machineagent.classpath"/>
+    <path refid="library.commons-httpclient-4.2.classpath"/>
+    <path refid="library.commons-lang-2.4.classpath"/>
+    <path refid="library.commons-logging-1.1.1.classpath"/>
+  </path>
+  
+  <path id="keynotemonitor.module.classpath">
+    <path refid="${module.jdk.classpath.keynotemonitor}"/>
+    <pathelement location="${keynotemonitor.output.dir}"/>
+    <path refid="library.resty.classpath"/>
+    <path refid="library.machineagent.classpath"/>
+    <path refid="library.commons-httpclient-4.2.classpath"/>
+    <path refid="library.commons-lang-2.4.classpath"/>
+    <path refid="library.commons-logging-1.1.1.classpath"/>
+  </path>
+  
+  <path id="keynotemonitor.runtime.module.classpath">
+    <pathelement location="${keynotemonitor.testoutput.dir}"/>
+    <pathelement location="${keynotemonitor.output.dir}"/>
+    <path refid="library.resty.classpath"/>
+    <path refid="library.machineagent.classpath"/>
+    <path refid="library.commons-httpclient-4.2.classpath"/>
+    <path refid="library.commons-lang-2.4.classpath"/>
+    <path refid="library.commons-logging-1.1.1.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.keynotemonitor">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.keynotemonitor">
+    <patternset refid="excluded.from.module.keynotemonitor"/>
+  </patternset>
+  
+  <path id="keynotemonitor.module.sourcepath">
+    <dirset dir="${module.keynotemonitor.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.keynotemonitor" depends="compile.module.keynotemonitor.production,compile.module.keynotemonitor.tests" description="Compile module KeynoteMonitor"/>
+  
+  <target name="compile.module.keynotemonitor.production" depends="register.custom.compilers" description="Compile module KeynoteMonitor; production classes">
+    <mkdir dir="${keynotemonitor.output.dir}"/>
+    <javac2 destdir="${keynotemonitor.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.keynotemonitor}/javac">
+      <compilerarg line="${compiler.args.keynotemonitor}"/>
+      <bootclasspath refid="keynotemonitor.module.bootclasspath"/>
+      <classpath refid="keynotemonitor.module.production.classpath"/>
+      <src refid="keynotemonitor.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.keynotemonitor"/>
+    </javac2>
+    
+    <copy todir="${keynotemonitor.output.dir}">
+      <fileset dir="${module.keynotemonitor.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.keynotemonitor.tests" depends="register.custom.compilers,compile.module.keynotemonitor.production" description="compile module KeynoteMonitor; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.keynotemonitor" description="cleanup module">
+    <delete dir="${keynotemonitor.output.dir}"/>
+    <delete dir="${keynotemonitor.testoutput.dir}"/>
+  </target>
+  
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+  
+  <target name="clean" depends="clean.module.keynotemonitor, clean.artifact.dist_folder" description="cleanup all"/>
+  
+  <target name="build.modules" depends="init, clean, compile.module.keynotemonitor" description="build all modules"/>
+  
+  <target name="init.artifacts">
+    <property name="artifacts.temp.dir" value="${basedir}/__artifacts_temp"/>
+    <property name="artifact.output.dist_folder" value="${basedir}/out/artifacts/dist_folder"/>
+    <property name="artifact.output.dist_jar" value="${basedir}/out/artifacts/dist_jar"/>
+    <property name="artifact.output.dist_zip" value="${basedir}/out/artifacts/dist_zip"/>
+    <mkdir dir="${artifacts.temp.dir}"/>
+    <property name="temp.jar.path.KeynoteMonitor.jar" value="${artifacts.temp.dir}/KeynoteMonitor.jar"/>
+    <property name="temp.jar.path.dist_jar.jar" value="${artifacts.temp.dir}/dist_jar.jar"/>
+    <property name="temp.jar.path.KeynoteMonitor.zip" value="${artifacts.temp.dir}/KeynoteMonitor.zip"/>
+    <property name="temp.jar.path.KeynoteMonitor.jar2" value="${artifacts.temp.dir}/1/KeynoteMonitor.jar"/>
+    <mkdir dir="${artifacts.temp.dir}/1"/>
+  </target>
+  
+  <target name="clean.artifact.dist_folder" description="clean dist_folder artifact output">
+    <delete dir="${artifact.output.dist_folder}"/>
+  </target>
+  
+  <target name="artifact.dist_folder" depends="init.artifacts, compile.module.keynotemonitor" description="Build &#39;dist_folder&#39; artifact">
+    <mkdir dir="${artifact.output.dist_folder}"/>
+    <jar destfile="${temp.jar.path.KeynoteMonitor.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${keynotemonitor.output.dir}"/>
+    </jar>
+    <mkdir dir="${artifact.output.dist_folder}/lib"/>
+    <copy file="${basedir}/lib/httpclient-4.2.3.jar" tofile="${artifact.output.dist_folder}/lib/httpclient-4.2.3.jar"/>
+    <copy file="${basedir}/lib/httpcore-4.2.2.jar" tofile="${artifact.output.dist_folder}/lib/httpcore-4.2.2.jar"/>
+    <copy file="${basedir}/lib/commons-lang-2.4.jar" tofile="${artifact.output.dist_folder}/lib/commons-lang-2.4.jar"/>
+    <copy file="${basedir}/lib/commons-logging-1.1.1.jar" tofile="${artifact.output.dist_folder}/lib/commons-logging-1.1.1.jar"/>
+    <copy file="${basedir}/lib/resty-0.3.2.jar" tofile="${artifact.output.dist_folder}/lib/resty-0.3.2.jar"/>
+    <copy file="${basedir}/conf/monitor.xml" tofile="${artifact.output.dist_folder}/monitor.xml"/>
+    <copy file="${temp.jar.path.KeynoteMonitor.jar}" tofile="${artifact.output.dist_folder}/KeynoteMonitor.jar"/>
+  </target>
+  
+  <target name="artifact.dist_jar" depends="init.artifacts, compile.module.keynotemonitor" description="Build &#39;dist_jar&#39; artifact">
+    <property name="artifact.temp.output.dist_jar" value="${artifacts.temp.dir}/dist_jar"/>
+    <mkdir dir="${artifact.temp.output.dist_jar}"/>
+    <jar destfile="${temp.jar.path.dist_jar.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${keynotemonitor.output.dir}"/>
+      <zipfileset file="${basedir}/META-INF/MANIFEST.MF" prefix="META-INF"/>
+    </jar>
+    <copy file="${temp.jar.path.dist_jar.jar}" tofile="${artifact.temp.output.dist_jar}/dist_jar.jar"/>
+  </target>
+  
+  <target name="artifact.dist_zip" depends="init.artifacts, compile.module.keynotemonitor" description="Build &#39;dist_zip&#39; artifact">
+    <property name="artifact.temp.output.dist_zip" value="${artifacts.temp.dir}/dist_zip"/>
+    <mkdir dir="${artifact.temp.output.dist_zip}"/>
+    <jar destfile="${temp.jar.path.KeynoteMonitor.jar2}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${keynotemonitor.output.dir}"/>
+    </jar>
+    <zip destfile="${temp.jar.path.KeynoteMonitor.zip}">
+      <zipfileset file="${basedir}/lib/httpclient-4.2.3.jar" prefix="lib"/>
+      <zipfileset file="${basedir}/lib/httpcore-4.2.2.jar" prefix="lib"/>
+      <zipfileset file="${basedir}/lib/commons-lang-2.4.jar" prefix="lib"/>
+      <zipfileset file="${basedir}/lib/commons-logging-1.1.1.jar" prefix="lib"/>
+      <zipfileset file="${basedir}/lib/resty-0.3.2.jar" prefix="lib"/>
+      <zipfileset file="${basedir}/conf/monitor.xml"/>
+      <zipfileset file="${temp.jar.path.KeynoteMonitor.jar2}"/>
+      <zipfileset file="${basedir}/CONTRIBUTING.md"/>
+      <zipfileset file="${basedir}/LICENSE"/>
+      <zipfileset file="${basedir}/README.md"/>
+    </zip>
+    <copy file="${temp.jar.path.KeynoteMonitor.zip}" tofile="${artifact.temp.output.dist_zip}/KeynoteMonitor.zip"/>
+  </target>
+  
+  <target name="build.all.artifacts" depends="artifact.dist_folder, artifact.dist_jar, artifact.dist_zip" description="Build all artifacts">
+    <mkdir dir="${artifact.output.dist_jar}"/>
+    <copy todir="${artifact.output.dist_jar}">
+      <fileset dir="${artifact.temp.output.dist_jar}"/>
+    </copy>
+    <mkdir dir="${artifact.output.dist_zip}"/>
+    <copy todir="${artifact.output.dist_zip}">
+      <fileset dir="${artifact.temp.output.dist_zip}"/>
+    </copy>
+    
+    <!-- Delete temporary files -->
+    <delete dir="${artifacts.temp.dir}"/>
+  </target>
+  
+  <target name="all" depends="build.modules, build.all.artifacts" description="build all"/>
+</project>
