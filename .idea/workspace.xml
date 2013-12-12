@@ -6,10 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f13b8002-3c71-4791-9cc0-d7868e530937" name="Default" comment="Copied libs into project, rearranged directory structure to ACE standard">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/ant.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build.properties" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build.xml" />
+    <list default="true" id="f13b8002-3c71-4791-9cc0-d7868e530937" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="6b178c47-858e-40c9-8552-d22bc750b37b" name="New changelist" comment="" />
@@ -20,7 +17,7 @@
     <file path="/Product.java" changelist="f13b8002-3c71-4791-9cc0-d7868e530937" time="1386548957004" ignored="false" />
     <file path="/BucketData.java" changelist="f13b8002-3c71-4791-9cc0-d7868e530937" time="1386801787523" ignored="false" />
     <file path="/Measurement.java" changelist="f13b8002-3c71-4791-9cc0-d7868e530937" time="1386566305643" ignored="false" />
-    <file path="/Dummy.txt" changelist="f13b8002-3c71-4791-9cc0-d7868e530937" time="1386878486012" ignored="false" />
+    <file path="/Dummy.txt" changelist="f13b8002-3c71-4791-9cc0-d7868e530937" time="1386878505684" ignored="false" />
     <file path="/monitor.xml" changelist="f13b8002-3c71-4791-9cc0-d7868e530937" time="1386801223160" ignored="false" />
     <file path="/README.md" changelist="f13b8002-3c71-4791-9cc0-d7868e530937" time="1386877622729" ignored="false" />
     <file path="/CONTRIBUTING.md" changelist="f13b8002-3c71-4791-9cc0-d7868e530937" time="1386802040984" ignored="false" />
@@ -459,7 +456,11 @@
       <created>1386877693758</created>
       <updated>1386877693758</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Created ant build file">
+      <created>1386878510290</created>
+      <updated>1386878510290</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -533,7 +534,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Copied libs into project, rearranged directory structure to ACE standard" />
+    <option name="LAST_COMMIT_MESSAGE" value="Created ant build file" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -550,6 +551,7 @@
     <MESSAGE value="Initial commit to Github" />
     <MESSAGE value="Updated docs" />
     <MESSAGE value="Copied libs into project, rearranged directory structure to ACE standard" />
+    <MESSAGE value="Created ant build file" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
