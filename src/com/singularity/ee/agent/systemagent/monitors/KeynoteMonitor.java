@@ -46,7 +46,7 @@ public class KeynoteMonitor extends AManagedMonitor {
 
     private Resty restClient = new Resty();
     private static final String BASE_URL = "http://api.keynote.com/keynote/api/";
-    private String apiKey = "b79ca429-92ac-31f5-8fcf-5ec24e4f4fc2";
+    private String apiKey = "c05f56b6-2ca8-3765-afc6-92745cb9709b";
     private int bucketSize = 60;
     private List<String> excludeSlotNames = new ArrayList<String>();
     private static final Log logger = LogFactory.getLog(KeynoteMonitor.class);
@@ -103,9 +103,10 @@ public class KeynoteMonitor extends AManagedMonitor {
             JSONObject responseData = restClient.json(uri).object();
             List<Product> products = Product.fromJSONArray(responseData.getJSONArray("product"));
             for (Product product : products) {
-                if (product.getId().equals("ApP")) {
+//                if (product.getId().equals("ApP")) {
+//                    List<Slot> slots = product.getSlots();
                     for (Slot slot : product.getSlots()) {
-                        if (slot.getTransType().equals("FAnalyze")) {
+//                        if (slot.getTransType().equals("FAnalyze")) {
                             String url = slot.getUrl();
                             logger.info("Found measurement slot: " + slot.getSlotAlias());
 
@@ -115,9 +116,9 @@ public class KeynoteMonitor extends AManagedMonitor {
                                 logger.info("Adding slot " + slot.getSlotAlias() + " to retrieve list");
                                 slotIdList.add(slot.getSlotId());
                             }
-                        }
+//                        }
                     }
-                }
+//                }
             }
 
             logger.info("Getting graph data for " + Integer.toString(slotIdList.size()) + " slots");
@@ -129,8 +130,9 @@ public class KeynoteMonitor extends AManagedMonitor {
                 List<Measurement> measurements = Measurement.fromJSONArray((responseData.getJSONArray("measurement")));
 
                 for (Measurement measurement : measurements) {
-                    String[] names = measurement.getAlias().split("\\(");
-                    String path = "Custom Metrics|Keynote|" + names[0];
+                    String[] names = measurement.getAlias().split(" \\(");
+                    String name = names[0];
+                    String path = "Custom Metrics|Keynote|" + name;
                     BucketData whichBucket = null;
                     for (int bucketId = measurement.getBuckets().size() - 1; bucketId >= 0; bucketId--) {
                         if (measurement.getBuckets().get(bucketId).getIsReporting() == 1) {
@@ -139,16 +141,21 @@ public class KeynoteMonitor extends AManagedMonitor {
                         }
                     }
 
-                    logger.info(names[0] + ": " + whichBucket.toString());
+                    if (whichBucket != null) {
 
-                    getMetricWriter(path + "|Performance",
-                            MetricWriter.METRIC_AGGREGATION_TYPE_OBSERVATION,
-                            MetricWriter.METRIC_TIME_ROLLUP_TYPE_CURRENT,
-                            MetricWriter.METRIC_CLUSTER_ROLLUP_TYPE_COLLECTIVE).printMetric(Long.toString(whichBucket.getPerfData()));
-                    getMetricWriter(path + "|Availability",
-                            MetricWriter.METRIC_AGGREGATION_TYPE_OBSERVATION,
-                            MetricWriter.METRIC_TIME_ROLLUP_TYPE_CURRENT,
-                            MetricWriter.METRIC_CLUSTER_ROLLUP_TYPE_COLLECTIVE).printMetric(Long.toString(whichBucket.getAvailData()));
+                        logger.info(name + ": " + whichBucket.toString());
+
+                        getMetricWriter(path + "|Performance",
+                                MetricWriter.METRIC_AGGREGATION_TYPE_OBSERVATION,
+                                MetricWriter.METRIC_TIME_ROLLUP_TYPE_CURRENT,
+                                MetricWriter.METRIC_CLUSTER_ROLLUP_TYPE_COLLECTIVE).printMetric(Long.toString(whichBucket.getPerfData()));
+                        getMetricWriter(path + "|Availability",
+                                MetricWriter.METRIC_AGGREGATION_TYPE_OBSERVATION,
+                                MetricWriter.METRIC_TIME_ROLLUP_TYPE_CURRENT,
+                                MetricWriter.METRIC_CLUSTER_ROLLUP_TYPE_COLLECTIVE).printMetric(Long.toString(whichBucket.getAvailData()));
+                    } else {
+                        logger.warn("Couldn't find a bucket for slot " + name + " that had valid measurements");
+                    }
                 }
             }
 
@@ -165,7 +172,7 @@ public class KeynoteMonitor extends AManagedMonitor {
 
     public static void main(String[] argv) throws Exception {
         Map<String, String> executeParams = new HashMap<String, String>();
-        executeParams.put("api_key", "b79ca429-92ac-31f5-8fcf-5ec24e4f4fc2");
+        executeParams.put("api_key", "c05f56b6-2ca8-3765-afc6-92745cb9709b");
         new KeynoteMonitor().execute(executeParams, null);
     }
 }
