@@ -3,10 +3,10 @@
     <output-path>$PROJECT_DIR$/out/artifacts/dist_folder</output-path>
     <root id="root">
       <element id="directory" name="lib">
-        <element id="library" level="project" name="commons-httpclient-4.2" />
-        <element id="library" level="project" name="commons-lang-2.4" />
-        <element id="library" level="project" name="commons-logging-1.1.1" />
-        <element id="library" level="project" name="resty" />
+        <element id="library" level="project" name="commons-httpclient" />
+        <element id="library" level="project" name="commons-lang" />
+        <element id="library" level="project" name="commons-logging" />
+        <element id="library" level="project" name="gson" />
       </element>
       <element id="file-copy" path="$PROJECT_DIR$/conf/monitor.xml" />
       <element id="archive" name="KeynoteMonitor.jar">

@@ -19,29 +19,15 @@ package com.singularity.ee.agent.systemagent.monitors.json;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Measurement {
-    private int id;
-    private String alias;
-    private List<BucketData> bucket_data;
+public class SlotMetadata {
 
-    public Measurement() {
-        bucket_data = new ArrayList<BucketData>();
+    private List<Product> product;
+
+    public SlotMetadata() {
+        product = new ArrayList<Product>();
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public String getAlias() {
-        return alias;
-    }
-
-    public List<BucketData> getBucketData() {
-        return bucket_data;
-    }
-
-    @Override
-    public String toString() {
-        return String.format("{%d %s}", id, alias);
+    public List<Product> getProducts() {
+        return product;
     }
 }

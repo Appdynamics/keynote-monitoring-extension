@@ -19,29 +19,23 @@ package com.singularity.ee.agent.systemagent.monitors.json;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Measurement {
-    private int id;
-    private String alias;
-    private List<BucketData> bucket_data;
+public class GraphData {
 
-    public Measurement() {
-        bucket_data = new ArrayList<BucketData>();
+    private List<Measurement> measurement;
+    private List<NameValueProperty> graph_property;
+
+    public GraphData() {
+        measurement = new ArrayList<Measurement>();
+        graph_property = new ArrayList<NameValueProperty>();
     }
 
-    public int getId() {
-        return id;
+    public List<Measurement> getMeasurements() {
+        return measurement;
     }
 
-    public String getAlias() {
-        return alias;
-    }
-
-    public List<BucketData> getBucketData() {
-        return bucket_data;
-    }
-
-    @Override
-    public String toString() {
-        return String.format("{%d %s}", id, alias);
+    @SuppressWarnings("UnusedDeclaration")
+    public List<NameValueProperty> getGraphProperties() {
+        return graph_property;
     }
 }
+

@@ -7,11 +7,11 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="resty" level="project" />
     <orderEntry type="library" name="machineagent" level="project" />
-    <orderEntry type="library" name="commons-httpclient-4.2" level="project" />
-    <orderEntry type="library" name="commons-lang-2.4" level="project" />
-    <orderEntry type="library" name="commons-logging-1.1.1" level="project" />
+    <orderEntry type="library" name="commons-httpclient" level="project" />
+    <orderEntry type="library" name="commons-lang" level="project" />
+    <orderEntry type="library" name="commons-logging" level="project" />
+    <orderEntry type="library" name="gson" level="project" />
   </component>
 </module>
 

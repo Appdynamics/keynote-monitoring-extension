@@ -16,42 +16,51 @@
 
 package com.singularity.ee.agent.systemagent.monitors;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.singularity.ee.agent.systemagent.api.AManagedMonitor;
 import com.singularity.ee.agent.systemagent.api.MetricWriter;
 import com.singularity.ee.agent.systemagent.api.TaskExecutionContext;
 import com.singularity.ee.agent.systemagent.api.TaskOutput;
 import com.singularity.ee.agent.systemagent.api.exception.TaskExecutionException;
-import com.singularity.ee.agent.systemagent.monitors.json.BucketData;
-import com.singularity.ee.agent.systemagent.monitors.json.Measurement;
-import com.singularity.ee.agent.systemagent.monitors.json.Product;
-import com.singularity.ee.agent.systemagent.monitors.json.Slot;
+import com.singularity.ee.agent.systemagent.monitors.json.*;
 
 import org.apache.commons.lang.StringUtils;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URIBuilder;
-
-import us.monoid.json.JSONException;
-import us.monoid.json.JSONObject;
-import us.monoid.web.Resty;
+import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class KeynoteMonitor extends AManagedMonitor {
 
-    private Resty restClient = new Resty();
-    private static final String BASE_URL = "http://api.keynote.com/keynote/api/";
     private String apiKey = "c05f56b6-2ca8-3765-afc6-92745cb9709b";
     private int bucketSize = 60;
-    private List<String> excludeSlotNames = new ArrayList<String>();
+    private List<Pattern> excludePatterns = new ArrayList<Pattern>();
+    private HttpClient client = new DefaultHttpClient();
+    private Gson gson;
+
+    private static final String BASE_URL = "http://api.keynote.com/keynote/api/";
     private static final Log logger = LogFactory.getLog(KeynoteMonitor.class);
 
     public KeynoteMonitor() {
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.setDateFormat("yyyy-MM-dd hh:mm:ss");
+        gson = gsonBuilder.create();
+        client = new DefaultHttpClient();
     }
 
     public URIBuilder getURIBuilder(String verb) throws URISyntaxException {
@@ -76,83 +85,89 @@ public class KeynoteMonitor extends AManagedMonitor {
     }
 
     public boolean isExcludedSlot(String slotName) {
-        for (String excludeName : excludeSlotNames) {
-            if (slotName.contains(excludeName)) {
+        for (Pattern pattern : excludePatterns) {
+            Matcher matcher = pattern.matcher(slotName);
+            if (matcher.find()) {
                 return true;
             }
         }
         return false;
     }
 
+    private <T> T fetchJson(URI uri, Class<T> clazz) throws IOException {
+        HttpGet method = new HttpGet(uri);
+        HttpResponse response = client.execute(method);
+        InputStream in = response.getEntity().getContent();
+        InputStreamReader reader = new InputStreamReader(in, "UTF-8");
+        return gson.fromJson(reader, clazz);
+    }
+
     @Override
     public TaskOutput execute(Map<String, String> stringStringMap, TaskExecutionContext taskExecutionContext) throws TaskExecutionException {
+
         if (stringStringMap.containsKey("api_key")) {
             apiKey = stringStringMap.get("api_key");
         }
-        if (stringStringMap.containsKey("exclude_slots")) {
-            String[] slotNames = stringStringMap.get("exclude_slots").split("\\s*,\\s*");
-            // TODO: elegantly convert String[] to List<String>
+
+        if (StringUtils.isNotEmpty(stringStringMap.get("exclude_slots"))) {
+            String[] patterns = stringStringMap.get("exclude_slots").split("\\s*,\\s*");
+            for (String pattern : patterns) {
+                this.excludePatterns.add(Pattern.compile(pattern));
+            }
         }
 
         try {
+
             List<Integer> slotIdList = new ArrayList<Integer>();
 
             logger.info("Getting slot metadata");
 
-            URI uri = getSlotMetadatURI();
-            JSONObject responseData = restClient.json(uri).object();
-            List<Product> products = Product.fromJSONArray(responseData.getJSONArray("product"));
-            for (Product product : products) {
-//                if (product.getId().equals("ApP")) {
-//                    List<Slot> slots = product.getSlots();
-                    for (Slot slot : product.getSlots()) {
-//                        if (slot.getTransType().equals("FAnalyze")) {
-                            String url = slot.getUrl();
-                            logger.info("Found measurement slot: " + slot.getSlotAlias());
+            SlotMetadata slotMetadata = fetchJson(getSlotMetadatURI(), SlotMetadata.class);
+            for (Product product : slotMetadata.getProducts()) {
+                for (Slot slot : product.getSlots()) {
+                    logger.debug("Found measurement slot: " + slot.getSlotAlias());
 
-                            if (isExcludedSlot(slot.getSlotAlias())) {
-                                    logger.info("Excluding slot " + slot.getSlotAlias() + " based on configuration");
-                            } else {
-                                logger.info("Adding slot " + slot.getSlotAlias() + " to retrieve list");
-                                slotIdList.add(slot.getSlotId());
-                            }
-//                        }
+                    if (isExcludedSlot(slot.getSlotAlias())) {
+                            logger.info("Excluding slot " + slot.getSlotAlias() + " based on configuration");
+                    } else {
+                        logger.debug("Adding slot " + slot.getSlotAlias() + " to retrieve list");
+                        slotIdList.add(slot.getSlotId());
                     }
-//                }
+                }
             }
 
             logger.info("Getting graph data for " + Integer.toString(slotIdList.size()) + " slots");
 
             if (slotIdList.size() > 0) {
 
-                uri = getGraphDataURI(slotIdList);
-                responseData = restClient.json(uri).object();
-                List<Measurement> measurements = Measurement.fromJSONArray((responseData.getJSONArray("measurement")));
-
-                for (Measurement measurement : measurements) {
+                GraphData graphData = fetchJson(getGraphDataURI(slotIdList), GraphData.class);
+                for (Measurement measurement : graphData.getMeasurements()) {
                     String[] names = measurement.getAlias().split(" \\(");
                     String name = names[0];
                     String path = "Custom Metrics|Keynote|" + name;
                     BucketData whichBucket = null;
-                    for (int bucketId = measurement.getBuckets().size() - 1; bucketId >= 0; bucketId--) {
-                        if (measurement.getBuckets().get(bucketId).getIsReporting() == 1) {
-                            whichBucket = measurement.getBuckets().get(bucketId);
+                    for (int bucketId = measurement.getBucketData().size() - 1; bucketId >= 0; bucketId--) {
+                        if (measurement.getBucketData().get(bucketId).getIsReporting() == 1) {
+                            whichBucket = measurement.getBucketData().get(bucketId);
                             break;
                         }
                     }
 
                     if (whichBucket != null) {
 
-                        logger.info(name + ": " + whichBucket.toString());
+                        logger.debug(name + ": " + whichBucket.toString());
+
+                        long perfData = Math.round(Double.valueOf(whichBucket.getPerfData().getValue()) * 1000.0);
+                        long availData = Math.round(Double.valueOf(whichBucket.getAvailData().getValue()));
 
                         getMetricWriter(path + "|Performance",
                                 MetricWriter.METRIC_AGGREGATION_TYPE_OBSERVATION,
                                 MetricWriter.METRIC_TIME_ROLLUP_TYPE_CURRENT,
-                                MetricWriter.METRIC_CLUSTER_ROLLUP_TYPE_COLLECTIVE).printMetric(Long.toString(whichBucket.getPerfData()));
+                                MetricWriter.METRIC_CLUSTER_ROLLUP_TYPE_COLLECTIVE).printMetric(Long.toString(perfData));
                         getMetricWriter(path + "|Availability",
                                 MetricWriter.METRIC_AGGREGATION_TYPE_OBSERVATION,
                                 MetricWriter.METRIC_TIME_ROLLUP_TYPE_CURRENT,
-                                MetricWriter.METRIC_CLUSTER_ROLLUP_TYPE_COLLECTIVE).printMetric(Long.toString(whichBucket.getAvailData()));
+                                MetricWriter.METRIC_CLUSTER_ROLLUP_TYPE_COLLECTIVE).printMetric(Long.toString(availData));
                     } else {
                         logger.warn("Couldn't find a bucket for slot " + name + " that had valid measurements");
                     }
@@ -163,8 +178,6 @@ public class KeynoteMonitor extends AManagedMonitor {
             logger.error("Error building Keynote API url", e);
         } catch (IOException e) {
             logger.error("IO exception fetching data from Keynote API", e);
-        } catch (JSONException e) {
-            logger.error("Error parsing JSON data from Keynote", e);
         }
 
         return new TaskOutput("Success");
@@ -173,6 +186,7 @@ public class KeynoteMonitor extends AManagedMonitor {
     public static void main(String[] argv) throws Exception {
         Map<String, String> executeParams = new HashMap<String, String>();
         executeParams.put("api_key", "c05f56b6-2ca8-3765-afc6-92745cb9709b");
+        executeParams.put("exclude_slots", "");
         new KeynoteMonitor().execute(executeParams, null);
     }
 }

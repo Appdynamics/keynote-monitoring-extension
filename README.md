@@ -27,7 +27,7 @@ api_key
 : An API key generated from the [Keynote API console][]. Required.
 
 exclude_slots
-: A comma-separated list of measurement slot names to be excluded from import. Optional.
+: A comma-separated list of measurement slot names to be excluded from import. You can use regular expressions for more specific matching. Optional.
 
 ## Metrics Provided ##
 

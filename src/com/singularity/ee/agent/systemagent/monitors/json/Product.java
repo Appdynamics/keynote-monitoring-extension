@@ -16,62 +16,35 @@
 
 package com.singularity.ee.agent.systemagent.monitors.json;
 
-import us.monoid.json.JSONArray;
-import us.monoid.json.JSONException;
-import us.monoid.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class Product {
+
+    @SuppressWarnings("UnusedDeclaration")
     private String name;
+    @SuppressWarnings("UnusedDeclaration")
     private String id;
-    private List<Slot> slots;
+    private List<Slot> slot;
 
     public Product() {
-        slots = new ArrayList<Slot>();
-    }
-
-    private Product(JSONObject obj) throws JSONException {
-        name = obj.getString("name");
-        id = obj.getString("id");
-        slots = Slot.fromJSONArray(obj.getJSONArray("slot"));
+        slot = new ArrayList<Slot>();
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public List<Slot> getSlots() {
-        return slots;
+        return slot;
     }
 
-    public void setSlots(List<Slot> slots) {
-        this.slots = slots;
+    @Override
+    public String toString() {
+        return String.format("{%s}", id);
     }
-
-    public static Product fromJSONObject(JSONObject obj) throws JSONException {
-        return new Product(obj);
-    }
-
-    public static List<Product> fromJSONArray(JSONArray jsonArray) throws JSONException {
-        ArrayList<Product> products = new ArrayList<Product>();
-        for (int i=0; i < jsonArray.length(); i++) {
-            products.add(Product.fromJSONObject(jsonArray.getJSONObject(i)));
-        }
-        return products;
-    }
-
 }

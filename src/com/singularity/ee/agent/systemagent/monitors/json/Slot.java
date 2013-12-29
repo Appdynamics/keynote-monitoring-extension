@@ -16,70 +16,85 @@
 
 package com.singularity.ee.agent.systemagent.monitors.json;
 
-import us.monoid.json.JSONArray;
-import us.monoid.json.JSONException;
-import us.monoid.json.JSONObject;
+import java.util.Date;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class Slot {
     private String url;
-    private int slotId;
-    private String slotAlias;
-    private String transType;
+    private int slot_id;
+    private String slot_alias;
+    private String trans_type;
+    private String pages;
+    private int shared_script_id;
+    private int agent_id;
+    private String agent_name;
+    private int target_id;
+    private Date start_date;
+    private Date end_date;
+    private int target_or_group;
+    private String target_type;
+    private int index_id;
 
-    public Slot() {
-    }
-
-    private Slot(JSONObject obj) throws JSONException {
-        url = obj.getString("url");
-        slotId = obj.getInt("slot_id");
-        slotAlias = obj.getString("slot_alias");
-        transType = obj.getString("trans_type");
-    }
+    public Slot() { }
 
     public String getUrl() {
         return url;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
     public int getSlotId() {
-        return slotId;
-    }
-
-    public void setSlotId(int slotId) {
-        this.slotId = slotId;
+        return slot_id;
     }
 
     public String getSlotAlias() {
-        return slotAlias;
-    }
-
-    public void setSlotAlias(String slotAlias) {
-        this.slotAlias = slotAlias;
+        return slot_alias;
     }
 
     public String getTransType() {
-        return transType;
+        return trans_type;
     }
 
-    public void setTransType(String transType) {
-        this.transType = transType;
+    public String getPages() {
+        return pages;
     }
 
-    public static Slot fromJSONObject(JSONObject jsonObject) throws JSONException {
-        return new Slot(jsonObject);
+    public int getSharedScriptId() {
+        return shared_script_id;
     }
 
-    public static List<Slot> fromJSONArray(JSONArray jsonArray) throws JSONException {
-        ArrayList<Slot> slots = new ArrayList<Slot>();
-        for (int i=0; i < jsonArray.length(); i++) {
-            slots.add(Slot.fromJSONObject(jsonArray.getJSONObject(i)));
-        }
-        return slots;
+    public int getAgentId() {
+        return agent_id;
+    }
+
+    public String getAgentName() {
+        return agent_name;
+    }
+
+    public int getTargetId() {
+        return target_id;
+    }
+
+    public Date getStartDate() {
+        return start_date;
+    }
+
+    public Date getEndDate() {
+        return end_date;
+    }
+
+    public int getTargetOrGroup() {
+        return target_or_group;
+    }
+
+    public String getTargetType() {
+        return target_type;
+    }
+
+    public int getIndexId() {
+        return index_id;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("{%d %s}", slot_id, slot_alias);
     }
 }
