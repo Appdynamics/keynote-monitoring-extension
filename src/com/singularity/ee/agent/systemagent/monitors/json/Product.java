@@ -21,9 +21,7 @@ import java.util.List;
 
 public class Product {
 
-    @SuppressWarnings("UnusedDeclaration")
     private String name;
-    @SuppressWarnings("UnusedDeclaration")
     private String id;
     private List<Slot> slot;
 

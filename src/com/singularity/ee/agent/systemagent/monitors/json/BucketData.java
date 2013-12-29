@@ -24,9 +24,7 @@ import java.util.Date;
 
 public class BucketData {
 
-    @SuppressWarnings("UnusedDeclaration")
     private String name;
-    @SuppressWarnings("UnusedDeclaration")
     private int id;
     private MeasureData perf_data;
     private MeasureData avail_data;

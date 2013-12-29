@@ -33,7 +33,6 @@ public class GraphData {
         return measurement;
     }
 
-    @SuppressWarnings("UnusedDeclaration")
     public List<NameValueProperty> getGraphProperties() {
         return graph_property;
     }

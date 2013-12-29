@@ -7,6 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f13b8002-3c71-4791-9cc0-d7868e530937" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/singularity/ee/agent/systemagent/monitors/json/BucketData.java" afterPath="$PROJECT_DIR$/src/com/singularity/ee/agent/systemagent/monitors/json/BucketData.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/singularity/ee/agent/systemagent/monitors/json/GraphData.java" afterPath="$PROJECT_DIR$/src/com/singularity/ee/agent/systemagent/monitors/json/GraphData.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/singularity/ee/agent/systemagent/monitors/json/Product.java" afterPath="$PROJECT_DIR$/src/com/singularity/ee/agent/systemagent/monitors/json/Product.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="6b178c47-858e-40c9-8552-d22bc750b37b" name="New changelist" comment="" />
@@ -17,7 +20,7 @@
     <file path="/Product.java" changelist="f13b8002-3c71-4791-9cc0-d7868e530937" time="1388293208199" ignored="false" />
     <file path="/BucketData.java" changelist="f13b8002-3c71-4791-9cc0-d7868e530937" time="1388295724489" ignored="false" />
     <file path="/Measurement.java" changelist="f13b8002-3c71-4791-9cc0-d7868e530937" time="1388295611295" ignored="false" />
-    <file path="/Dummy.txt" changelist="f13b8002-3c71-4791-9cc0-d7868e530937" time="1388297125712" ignored="false" />
+    <file path="/Dummy.txt" changelist="f13b8002-3c71-4791-9cc0-d7868e530937" time="1388297187472" ignored="false" />
     <file path="/monitor.xml" changelist="f13b8002-3c71-4791-9cc0-d7868e530937" time="1387506949695" ignored="false" />
     <file path="/README.md" changelist="f13b8002-3c71-4791-9cc0-d7868e530937" time="1388292002465" ignored="false" />
     <file path="/CONTRIBUTING.md" changelist="f13b8002-3c71-4791-9cc0-d7868e530937" time="1386802040984" ignored="false" />
@@ -41,6 +44,7 @@
     <file path="/MeasureData.java" changelist="f13b8002-3c71-4791-9cc0-d7868e530937" time="1388295285800" ignored="false" />
     <file path="/SlotMetadata.java" changelist="f13b8002-3c71-4791-9cc0-d7868e530937" time="1388296011617" ignored="false" />
     <file path="/NameValueProperty.java" changelist="f13b8002-3c71-4791-9cc0-d7868e530937" time="1388296049494" ignored="false" />
+    <file path="/*.regexp" changelist="f13b8002-3c71-4791-9cc0-d7868e530937" time="1388297298813" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,14 +129,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GraphData.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="GraphData.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/singularity/ee/agent/systemagent/monitors/json/GraphData.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="0" selection-start="1062" selection-end="1105" vertical-scroll-proportion="0.0">
+            <state line="35" column="0" selection-start="1062" selection-end="1062" vertical-scroll-proportion="0.60336536">
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="imports" expanded="true" />
-                <element signature="e#1066#1104#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -171,14 +174,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BucketData.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="BucketData.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/singularity/ee/agent/systemagent/monitors/json/BucketData.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="0" selection-start="703" selection-end="703" vertical-scroll-proportion="0.36778846">
+            <state line="27" column="0" selection-start="848" selection-end="848" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="n#!!doc" expanded="true" />
-                <element signature="e#827#865#0" expanded="true" />
-                <element signature="e#895#933#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -187,12 +189,10 @@
       <file leaf-file-name="Product.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/singularity/ee/agent/systemagent/monitors/json/Product.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="0" selection-start="846" selection-end="846" vertical-scroll-proportion="0.0">
+            <state line="24" column="21" selection-start="781" selection-end="781" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="imports" expanded="true" />
-                <element signature="e#739#777#0" expanded="true" />
-                <element signature="e#807#845#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -228,10 +228,10 @@
         <option value="$PROJECT_DIR$/src/com/singularity/ee/agent/systemagent/monitors/json/NameValueProperty.java" />
         <option value="$PROJECT_DIR$/src/com/singularity/ee/agent/systemagent/monitors/json/MeasureData.java" />
         <option value="$PROJECT_DIR$/src/com/singularity/ee/agent/systemagent/monitors/json/SlotMetadata.java" />
-        <option value="$PROJECT_DIR$/src/com/singularity/ee/agent/systemagent/monitors/json/GraphData.java" />
         <option value="$PROJECT_DIR$/src/com/singularity/ee/agent/systemagent/monitors/KeynoteMonitor.java" />
         <option value="$PROJECT_DIR$/src/com/singularity/ee/agent/systemagent/monitors/json/Product.java" />
         <option value="$PROJECT_DIR$/src/com/singularity/ee/agent/systemagent/monitors/json/BucketData.java" />
+        <option value="$PROJECT_DIR$/src/com/singularity/ee/agent/systemagent/monitors/json/GraphData.java" />
       </list>
     </option>
   </component>
@@ -581,7 +581,11 @@
       <created>1388297132091</created>
       <updated>1388297132092</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Switched from Resty library to Google GSON, added exclude_slots functionality">
+      <created>1388297145212</created>
+      <updated>1388297145212</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -590,14 +594,14 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998565" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32998565" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24964131" sideWeight="0.45624104" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39885223" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32904148" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32998565" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998565" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24964131" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -775,11 +779,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/singularity/ee/agent/systemagent/monitors/json/MeasureData.java">
+    <entry file="file://$PROJECT_DIR$/src/com/singularity/ee/agent/systemagent/monitors/KeynoteMonitor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="597" vertical-scroll-proportion="0.0">
+        <state line="36" column="0" selection-start="1425" selection-end="1425" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="n#!!doc" expanded="true" />
+            <element signature="e#1925#1934#0" expanded="true" />
+            <element signature="e#4605#4614#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/singularity/ee/agent/systemagent/monitors/json/Product.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="21" selection-start="781" selection-end="781" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -794,47 +810,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/singularity/ee/agent/systemagent/monitors/KeynoteMonitor.java">
+    <entry file="file://$PROJECT_DIR$/src/com/singularity/ee/agent/systemagent/monitors/json/BucketData.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="0" selection-start="1425" selection-end="1425" vertical-scroll-proportion="0.0">
+        <state line="27" column="0" selection-start="848" selection-end="848" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="n#!!doc" expanded="true" />
-            <element signature="e#1925#1934#0" expanded="true" />
-            <element signature="e#4605#4614#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/singularity/ee/agent/systemagent/monitors/json/MeasureData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="597" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/singularity/ee/agent/systemagent/monitors/json/GraphData.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="0" selection-start="1062" selection-end="1105" vertical-scroll-proportion="0.0">
+        <state line="35" column="0" selection-start="1062" selection-end="1062" vertical-scroll-proportion="0.60336536">
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="imports" expanded="true" />
-            <element signature="e#1066#1104#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/singularity/ee/agent/systemagent/monitors/json/Product.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="0" selection-start="846" selection-end="846" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="imports" expanded="true" />
-            <element signature="e#739#777#0" expanded="true" />
-            <element signature="e#807#845#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/singularity/ee/agent/systemagent/monitors/json/BucketData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="0" selection-start="703" selection-end="703" vertical-scroll-proportion="0.36778846">
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#827#865#0" expanded="true" />
-            <element signature="e#895#933#0" expanded="true" />
           </folding>
         </state>
       </provider>
