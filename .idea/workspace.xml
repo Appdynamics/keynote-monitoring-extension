@@ -7,25 +7,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f13b8002-3c71-4791-9cc0-d7868e530937" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/gson-2.2.2.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/singularity/ee/agent/systemagent/monitors/json/GraphData.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/singularity/ee/agent/systemagent/monitors/json/MeasureData.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/singularity/ee/agent/systemagent/monitors/json/NameValueProperty.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/singularity/ee/agent/systemagent/monitors/json/SlotMetadata.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/resty-0.3.2.jar" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/.idea/libraries/commons_httpclient_4_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/commons_httpclient.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/.idea/libraries/commons_lang_2_4.xml" afterPath="$PROJECT_DIR$/.idea/libraries/commons_lang.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/.idea/libraries/commons_logging_1_1_1.xml" afterPath="$PROJECT_DIR$/.idea/libraries/commons_logging.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/.idea/libraries/resty.xml" afterPath="$PROJECT_DIR$/.idea/libraries/gson.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/singularity/ee/agent/systemagent/monitors/json/BucketData.java" afterPath="$PROJECT_DIR$/src/com/singularity/ee/agent/systemagent/monitors/json/BucketData.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/KeynoteMonitor.iml" afterPath="$PROJECT_DIR$/KeynoteMonitor.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/singularity/ee/agent/systemagent/monitors/KeynoteMonitor.java" afterPath="$PROJECT_DIR$/src/com/singularity/ee/agent/systemagent/monitors/KeynoteMonitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/singularity/ee/agent/systemagent/monitors/json/Measurement.java" afterPath="$PROJECT_DIR$/src/com/singularity/ee/agent/systemagent/monitors/json/Measurement.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/singularity/ee/agent/systemagent/monitors/json/Product.java" afterPath="$PROJECT_DIR$/src/com/singularity/ee/agent/systemagent/monitors/json/Product.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/singularity/ee/agent/systemagent/monitors/json/Slot.java" afterPath="$PROJECT_DIR$/src/com/singularity/ee/agent/systemagent/monitors/json/Slot.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/dist_folder.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/dist_folder.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/dist_zip.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/dist_zip.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="6b178c47-858e-40c9-8552-d22bc750b37b" name="New changelist" comment="" />
@@ -36,7 +17,7 @@
     <file path="/Product.java" changelist="f13b8002-3c71-4791-9cc0-d7868e530937" time="1388293208199" ignored="false" />
     <file path="/BucketData.java" changelist="f13b8002-3c71-4791-9cc0-d7868e530937" time="1388295724489" ignored="false" />
     <file path="/Measurement.java" changelist="f13b8002-3c71-4791-9cc0-d7868e530937" time="1388295611295" ignored="false" />
-    <file path="/Dummy.txt" changelist="f13b8002-3c71-4791-9cc0-d7868e530937" time="1388297091686" ignored="false" />
+    <file path="/Dummy.txt" changelist="f13b8002-3c71-4791-9cc0-d7868e530937" time="1388297125712" ignored="false" />
     <file path="/monitor.xml" changelist="f13b8002-3c71-4791-9cc0-d7868e530937" time="1387506949695" ignored="false" />
     <file path="/README.md" changelist="f13b8002-3c71-4791-9cc0-d7868e530937" time="1388292002465" ignored="false" />
     <file path="/CONTRIBUTING.md" changelist="f13b8002-3c71-4791-9cc0-d7868e530937" time="1386802040984" ignored="false" />
@@ -596,7 +577,11 @@
       <created>1386889199200</created>
       <updated>1386889199200</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Switched from Resty library to Google GSON, added exclude_slots functionality">
+      <created>1388297132091</created>
+      <updated>1388297132092</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="ToolWindowManager">
