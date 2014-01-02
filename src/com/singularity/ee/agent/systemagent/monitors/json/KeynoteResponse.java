@@ -16,18 +16,27 @@
 
 package com.singularity.ee.agent.systemagent.monitors.json;
 
-import java.util.ArrayList;
-import java.util.List;
+public class KeynoteResponse {
+    private String message;
+    private int code;
+    private String status;
 
-public class SlotMetadata extends KeynoteResponse {
-
-    private List<Product> product;
-
-    public SlotMetadata() {
-        product = new ArrayList<Product>();
+    public KeynoteResponse() {
     }
 
-    public List<Product> getProducts() {
-        return product;
+    public String getMessage() {
+        return message;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public boolean isError() {
+        return this.getCode() >= 400;
     }
 }

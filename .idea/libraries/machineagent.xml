@@ -4,6 +4,8 @@
       <root url="jar://$PROJECT_DIR$/lib/machineagent.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../AppD/codebase/agent/system-agent/src/java" />
+    </SOURCES>
   </library>
 </component>

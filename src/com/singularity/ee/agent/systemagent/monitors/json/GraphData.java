@@ -19,7 +19,7 @@ package com.singularity.ee.agent.systemagent.monitors.json;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GraphData {
+public class GraphData extends KeynoteResponse {
 
     private List<Measurement> measurement;
     private List<NameValueProperty> graph_property;

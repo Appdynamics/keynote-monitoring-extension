@@ -17,7 +17,8 @@
         Make sure you change the following arguments:
 
         api_key: Required. Unique key you generate from http://api.keynote.com/apiconsole/apikeygen.aspx.
-        exclude_slots: Optional. Comma-separated list of measurement slots to be ignored.
+        exclude_slots: Optional. Comma-separated list of measurement slots to be ignored. You can use simple
+            strings or regular expressions.
 
         For more information, see README.md.
         -->

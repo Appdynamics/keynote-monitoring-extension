@@ -94,12 +94,23 @@ public class KeynoteMonitor extends AManagedMonitor {
         return false;
     }
 
-    private <T> T fetchJson(URI uri, Class<T> clazz) throws IOException {
+    private <T extends KeynoteResponse> T fetchJson(URI uri, Class<T> clazz) throws IOException {
+
         HttpGet method = new HttpGet(uri);
         HttpResponse response = client.execute(method);
+
+        if (response.getStatusLine().getStatusCode() >= 400) {
+            throw new IOException("HTTP call failed: " + response.getStatusLine().getReasonPhrase());
+        }
+
         InputStream in = response.getEntity().getContent();
         InputStreamReader reader = new InputStreamReader(in, "UTF-8");
-        return gson.fromJson(reader, clazz);
+
+        KeynoteResponse obj = gson.fromJson(reader, clazz);
+        if (obj.isError()) {
+            throw new IOException("Keynote API error: " + obj.getMessage());
+        }
+        return (T)obj;
     }
 
     @Override
@@ -158,29 +169,33 @@ public class KeynoteMonitor extends AManagedMonitor {
                         logger.debug(name + ": " + whichBucket.toString());
 
                         long perfData = Math.round(Double.valueOf(whichBucket.getPerfData().getValue()) * 1000.0);
-                        long availData = Math.round(Double.valueOf(whichBucket.getAvailData().getValue()));
-
                         getMetricWriter(path + "|Performance",
                                 MetricWriter.METRIC_AGGREGATION_TYPE_OBSERVATION,
                                 MetricWriter.METRIC_TIME_ROLLUP_TYPE_CURRENT,
                                 MetricWriter.METRIC_CLUSTER_ROLLUP_TYPE_COLLECTIVE).printMetric(Long.toString(perfData));
+
+                        long availData = Math.round(Double.valueOf(whichBucket.getAvailData().getValue()));
                         getMetricWriter(path + "|Availability",
                                 MetricWriter.METRIC_AGGREGATION_TYPE_OBSERVATION,
                                 MetricWriter.METRIC_TIME_ROLLUP_TYPE_CURRENT,
                                 MetricWriter.METRIC_CLUSTER_ROLLUP_TYPE_COLLECTIVE).printMetric(Long.toString(availData));
+
                     } else {
                         logger.warn("Couldn't find a bucket for slot " + name + " that had valid measurements");
                     }
                 }
             }
 
+            logger.info("Success");
+            return new TaskOutput("Success");
+
         } catch (URISyntaxException e) {
             logger.error("Error building Keynote API url", e);
+            throw new TaskExecutionException("Keynote task execution failed", e);
         } catch (IOException e) {
             logger.error("IO exception fetching data from Keynote API", e);
+            throw new TaskExecutionException("Keynote task execution failed", e);
         }
-
-        return new TaskOutput("Success");
     }
 
     public static void main(String[] argv) throws Exception {
