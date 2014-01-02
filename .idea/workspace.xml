@@ -7,12 +7,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f13b8002-3c71-4791-9cc0-d7868e530937" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/singularity/ee/agent/systemagent/monitors/json/KeynoteResponse.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/singularity/ee/agent/systemagent/monitors/json/GraphData.java" afterPath="$PROJECT_DIR$/src/com/singularity/ee/agent/systemagent/monitors/json/GraphData.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/singularity/ee/agent/systemagent/monitors/KeynoteMonitor.java" afterPath="$PROJECT_DIR$/src/com/singularity/ee/agent/systemagent/monitors/KeynoteMonitor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/singularity/ee/agent/systemagent/monitors/json/SlotMetadata.java" afterPath="$PROJECT_DIR$/src/com/singularity/ee/agent/systemagent/monitors/json/SlotMetadata.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/machineagent.xml" afterPath="$PROJECT_DIR$/.idea/libraries/machineagent.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/conf/monitor.xml" afterPath="$PROJECT_DIR$/conf/monitor.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <list id="6b178c47-858e-40c9-8552-d22bc750b37b" name="New changelist" comment="" />
@@ -23,7 +17,7 @@
     <file path="/Product.java" changelist="f13b8002-3c71-4791-9cc0-d7868e530937" time="1388293208199" ignored="false" />
     <file path="/BucketData.java" changelist="f13b8002-3c71-4791-9cc0-d7868e530937" time="1388295724489" ignored="false" />
     <file path="/Measurement.java" changelist="f13b8002-3c71-4791-9cc0-d7868e530937" time="1388295611295" ignored="false" />
-    <file path="/Dummy.txt" changelist="f13b8002-3c71-4791-9cc0-d7868e530937" time="1388675938152" ignored="false" />
+    <file path="/Dummy.txt" changelist="f13b8002-3c71-4791-9cc0-d7868e530937" time="1388675976643" ignored="false" />
     <file path="/monitor.xml" changelist="f13b8002-3c71-4791-9cc0-d7868e530937" time="1388674685491" ignored="false" />
     <file path="/README.md" changelist="f13b8002-3c71-4791-9cc0-d7868e530937" time="1388292002465" ignored="false" />
     <file path="/CONTRIBUTING.md" changelist="f13b8002-3c71-4791-9cc0-d7868e530937" time="1386802040984" ignored="false" />
@@ -567,7 +561,11 @@
       <created>1388297320187</created>
       <updated>1388297320187</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Added error checking around Keynote API calls">
+      <created>1388675980211</created>
+      <updated>1388675980211</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="ToolWindowManager">
