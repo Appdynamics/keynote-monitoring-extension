@@ -262,7 +262,7 @@
     <copy file="${basedir}/lib/commons-lang-2.4.jar" tofile="${artifact.output.dist_folder}/lib/commons-lang-2.4.jar"/>
     <copy file="${basedir}/lib/commons-logging-1.1.1.jar" tofile="${artifact.output.dist_folder}/lib/commons-logging-1.1.1.jar"/>
     <copy file="${basedir}/lib/resty-0.3.2.jar" tofile="${artifact.output.dist_folder}/lib/resty-0.3.2.jar"/>
-    <copy file="${basedir}/conf/monitor.xml" tofile="${artifact.output.dist_folder}/monitor.xml"/>
+    <copy file="/src/main/resources/conf/monitor.xml" tofile="${artifact.output.dist_folder}/monitor.xml"/>
     <copy file="${temp.jar.path.KeynoteMonitor.jar}" tofile="${artifact.output.dist_folder}/KeynoteMonitor.jar"/>
   </target>
   
@@ -288,7 +288,7 @@
       <zipfileset file="${basedir}/lib/commons-lang-2.4.jar" prefix="lib"/>
       <zipfileset file="${basedir}/lib/commons-logging-1.1.1.jar" prefix="lib"/>
       <zipfileset file="${basedir}/lib/resty-0.3.2.jar" prefix="lib"/>
-      <zipfileset file="${basedir}/conf/monitor.xml"/>
+      <zipfileset file="/src/main/resources/conf/monitor.xml"/>
       <zipfileset file="${temp.jar.path.KeynoteMonitor.jar2}"/>
       <zipfileset file="${basedir}/CONTRIBUTING.md"/>
       <zipfileset file="${basedir}/LICENSE"/>

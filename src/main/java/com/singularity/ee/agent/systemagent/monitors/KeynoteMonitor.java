@@ -53,10 +53,15 @@ public class KeynoteMonitor extends AManagedMonitor {
     private HttpClient client = new DefaultHttpClient();
     private Gson gson;
 
-    private static final String BASE_URL = "http://api.keynote.com/keynote/api/";
+    private static final String BASE_URL = "https://api.keynote.com/keynote/api/";
     private static final Log logger = LogFactory.getLog(KeynoteMonitor.class);
 
     public KeynoteMonitor() {
+        String version = getClass().getPackage().getImplementationTitle();
+        String msg = String.format("Using Monitor Version [%s]", version);
+        logger.info(msg);
+        System.out.println(msg);
+
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.setDateFormat("yyyy-MM-dd hh:mm:ss");
         gson = gsonBuilder.create();
@@ -65,6 +70,7 @@ public class KeynoteMonitor extends AManagedMonitor {
 
     public URIBuilder getURIBuilder(String verb) throws URISyntaxException {
         URIBuilder uriBuilder = new URIBuilder(BASE_URL + verb);
+        logger.debug("The uri is initialized to "+uriBuilder.toString());
         uriBuilder.addParameter("api_key", apiKey);
         uriBuilder.addParameter("format", "json");
         return uriBuilder;
@@ -105,15 +111,17 @@ public class KeynoteMonitor extends AManagedMonitor {
 
         InputStream in = response.getEntity().getContent();
         InputStreamReader reader = new InputStreamReader(in, "UTF-8");
-
         KeynoteResponse obj = gson.fromJson(reader, clazz);
+        if(logger.isDebugEnabled()){
+            logger.debug("The json object is "+gson.toJson(obj));
+        }
+
         if (obj.isError()) {
             throw new IOException("Keynote API error: " + obj.getMessage());
         }
         return (T)obj;
     }
 
-    @Override
     public TaskOutput execute(Map<String, String> stringStringMap, TaskExecutionContext taskExecutionContext) throws TaskExecutionException {
 
         if (stringStringMap.containsKey("api_key")) {
@@ -169,12 +177,14 @@ public class KeynoteMonitor extends AManagedMonitor {
                         logger.debug(name + ": " + whichBucket.toString());
 
                         long perfData = Math.round(Double.valueOf(whichBucket.getPerfData().getValue()) * 1000.0);
+                        logger.debug("The " + path + "|Performance value is " + perfData);
                         getMetricWriter(path + "|Performance",
                                 MetricWriter.METRIC_AGGREGATION_TYPE_OBSERVATION,
                                 MetricWriter.METRIC_TIME_ROLLUP_TYPE_CURRENT,
                                 MetricWriter.METRIC_CLUSTER_ROLLUP_TYPE_COLLECTIVE).printMetric(Long.toString(perfData));
 
                         long availData = Math.round(Double.valueOf(whichBucket.getAvailData().getValue()));
+                        logger.debug("The " + path + "|Availability value is " + availData);
                         getMetricWriter(path + "|Availability",
                                 MetricWriter.METRIC_AGGREGATION_TYPE_OBSERVATION,
                                 MetricWriter.METRIC_TIME_ROLLUP_TYPE_CURRENT,
