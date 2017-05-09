@@ -1,12 +1,12 @@
 /**
  * Copyright 2013 AppDynamics Inc.
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
+ * <p>
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -24,43 +24,42 @@ import com.singularity.ee.agent.systemagent.api.TaskExecutionContext;
 import com.singularity.ee.agent.systemagent.api.TaskOutput;
 import com.singularity.ee.agent.systemagent.api.exception.TaskExecutionException;
 import com.singularity.ee.agent.systemagent.monitors.json.*;
-
 import org.apache.commons.lang.StringUtils;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class KeynoteMonitor extends AManagedMonitor {
 
-    private String apiKey = "c05f56b6-2ca8-3765-afc6-92745cb9709b";
+    //private String apiKey = "c05f56b6-2ca8-3765-afc6-92745cb9709b";
+    private String apiKey;
     private int bucketSize = 60;
     private List<Pattern> excludePatterns = new ArrayList<Pattern>();
     private HttpClient client = new DefaultHttpClient();
     private Gson gson;
 
     private static final String BASE_URL = "https://api.keynote.com/keynote/api/";
-    private static final Log logger = LogFactory.getLog(KeynoteMonitor.class);
+    private static final Logger logger = Logger.getLogger(KeynoteMonitor.class);
 
     public KeynoteMonitor() {
-        String version = getClass().getPackage().getImplementationTitle();
-        String msg = String.format("Using Monitor Version [%s]", version);
-        logger.info(msg);
-        System.out.println(msg);
+        System.out.println(logVersion());
 
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.setDateFormat("yyyy-MM-dd hh:mm:ss");
@@ -70,7 +69,7 @@ public class KeynoteMonitor extends AManagedMonitor {
 
     public URIBuilder getURIBuilder(String verb) throws URISyntaxException {
         URIBuilder uriBuilder = new URIBuilder(BASE_URL + verb);
-        logger.debug("The uri is initialized to "+uriBuilder.toString());
+        logger.debug("The uri is initialized to " + uriBuilder.toString());
         uriBuilder.addParameter("api_key", apiKey);
         uriBuilder.addParameter("format", "json");
         return uriBuilder;
@@ -105,24 +104,34 @@ public class KeynoteMonitor extends AManagedMonitor {
         HttpGet method = new HttpGet(uri);
         HttpResponse response = client.execute(method);
 
-        if (response.getStatusLine().getStatusCode() >= 400) {
+        if (response.getStatusLine().getStatusCode() == 200) {
+            InputStream in = null;
+            try {
+                in = response.getEntity().getContent();
+                InputStreamReader reader = new InputStreamReader(in, "UTF-8");
+                KeynoteResponse obj = gson.fromJson(reader, clazz);
+                if (logger.isDebugEnabled()) {
+                    logger.debug("The json object is " + gson.toJson(obj));
+                }
+                if (obj.isError()) {
+                    throw new IOException("Keynote API error: " + obj.getMessage());
+                }
+                return (T) obj;
+            } finally {
+                if (in != null) {
+                    in.close();
+                }
+            }
+        } else {
+            logger.error("HTTP call failed: " + response.getStatusLine().getReasonPhrase());
             throw new IOException("HTTP call failed: " + response.getStatusLine().getReasonPhrase());
         }
 
-        InputStream in = response.getEntity().getContent();
-        InputStreamReader reader = new InputStreamReader(in, "UTF-8");
-        KeynoteResponse obj = gson.fromJson(reader, clazz);
-        if(logger.isDebugEnabled()){
-            logger.debug("The json object is "+gson.toJson(obj));
-        }
-
-        if (obj.isError()) {
-            throw new IOException("Keynote API error: " + obj.getMessage());
-        }
-        return (T)obj;
     }
 
     public TaskOutput execute(Map<String, String> stringStringMap, TaskExecutionContext taskExecutionContext) throws TaskExecutionException {
+
+        logger.info(logVersion());
 
         if (stringStringMap.containsKey("api_key")) {
             apiKey = stringStringMap.get("api_key");
@@ -147,7 +156,7 @@ public class KeynoteMonitor extends AManagedMonitor {
                     logger.debug("Found measurement slot: " + slot.getSlotAlias());
 
                     if (isExcludedSlot(slot.getSlotAlias())) {
-                            logger.info("Excluding slot " + slot.getSlotAlias() + " based on configuration");
+                        logger.info("Excluding slot " + slot.getSlotAlias() + " based on configuration");
                     } else {
                         logger.debug("Adding slot " + slot.getSlotAlias() + " to retrieve list");
                         slotIdList.add(slot.getSlotId());
@@ -206,6 +215,15 @@ public class KeynoteMonitor extends AManagedMonitor {
             logger.error("IO exception fetching data from Keynote API", e);
             throw new TaskExecutionException("Keynote task execution failed", e);
         }
+    }
+
+    private String logVersion() {
+        String msg = "Using Monitor Version [" + getImplementationVersion() + "]";
+        return msg;
+    }
+
+    private static String getImplementationVersion() {
+        return KeynoteMonitor.class.getPackage().getImplementationTitle();
     }
 
     public static void main(String[] argv) throws Exception {

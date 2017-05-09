@@ -24,7 +24,7 @@
         -->
 
         <task-arguments>
-            <argument name="api_key" is-required="true" default-value="b79ca429-92ac-31f5-8fcf-5ec24e4f4fc2"/>
+            <argument name="api_key" is-required="true" default-value=""/>
             <argument name="exclude_slots" is-required="true" default-value=""/>
         </task-arguments>
         <java-task>
